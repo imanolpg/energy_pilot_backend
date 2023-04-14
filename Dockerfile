@@ -1,4 +1,4 @@
-FROM node:16
+FROM node:19
 
 WORKDIR /app
 
@@ -12,4 +12,6 @@ EXPOSE 8000
 
 RUN npm run build
 
-CMD ["npm", "run", "start"]
+# this command is not needed because it is launched when
+# database service is created and port is available
+# CMD ["npm", "run", "start"]

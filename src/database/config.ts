@@ -12,6 +12,7 @@ const connection: Sequelize = new Sequelize({
   username: nconf.get("DB_USER"),
   password: nconf.get("DB_PASSWORD"),
   database: nconf.get("DB_SCHEMA"),
+  port: nconf.get("DB_PORT"),
   models:[User, Current, Voltaje],
   logging: ((log) => {
     if(nconf.get("SEQUELIZE_LOGGIN")) {

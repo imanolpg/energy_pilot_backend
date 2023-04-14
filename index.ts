@@ -11,6 +11,7 @@ import { SEQUELIZE_INSERT_EXAMPLES } from "./src/database/examples.insert";
 // connect to the database
 try {
   connection.sync({force: nconf.get("SEQUELIZE_FORCE_RESTART_DB")}).then(() => {
+    EPLogger.info("Database connected!");
     if (nconf.get("SEQUELIZE_INSERT_EXAMPLES")) {
       SEQUELIZE_INSERT_EXAMPLES();
     }
