@@ -22,10 +22,10 @@ class Current extends Model {
     allowNull: false,
     comment: "Date and time when the current lecture was made"
   })
-  time!: number;
+  date!: string;
 
   @Column({
-    type: DataType.DECIMAL,
+    type: DataType.FLOAT,
     allowNull: false,
     comment: "Value of the current lecture"
   })

@@ -6,10 +6,15 @@ import {router} from "./src/routes";
 import { connection } from './src/database/config';
 import { EPLogger } from './src/utils';
 import { exit } from 'process';
+import { SEQUELIZE_INSERT_EXAMPLES } from "./src/database/examples.insert";
 
 // connect to the database
 try {
-  connection.sync({force: nconf.get("SEQUELIZE_FORCE_RESTART_DB")});
+  connection.sync({force: nconf.get("SEQUELIZE_FORCE_RESTART_DB")}).then(() => {
+    if (nconf.get("SEQUELIZE_INSERT_EXAMPLES")) {
+      SEQUELIZE_INSERT_EXAMPLES();
+    }
+    });
 } catch (e) {
   EPLogger.error(String(e));
   exit(1);

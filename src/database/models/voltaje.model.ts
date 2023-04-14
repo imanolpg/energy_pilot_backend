@@ -22,10 +22,10 @@ class Voltaje extends Model {
     allowNull: false,
     comment: "Date and time when the voltaje lecture was made"
   })
-  time!: number;
+  date!: string;
 
   @Column({
-    type: DataType.DECIMAL,
+    type: DataType.FLOAT,
     allowNull: false,
     comment: "Value of the voltaje lecture"
   })

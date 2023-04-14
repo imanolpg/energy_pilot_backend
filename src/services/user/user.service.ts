@@ -5,7 +5,7 @@ class UserService {
 
   private constructor() {}
 
-  public static generateSingleton() {
+  public static generateSingleton(): void {
     if (!UserService.instance) {
       UserService.instance = new UserService();
     }

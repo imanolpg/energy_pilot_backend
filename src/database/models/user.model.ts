@@ -10,15 +10,16 @@ class User extends Model {
 
   @Column({
     type: DataType.INTEGER,
-    allowNull: false,
     comment: "User id",
-    primaryKey: true
+    primaryKey: true,
+    autoIncrement: true
   })
   id!: number;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
+    unique: true,
     comment: "Username of the user"
   })
   userName!: string;

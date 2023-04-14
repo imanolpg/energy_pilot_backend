@@ -18,15 +18,19 @@ class EPLogger {
     }
   }
 
-  public static info(message: string) {
+  public static info(message: string): void {
     EPLogger.tslogger.info(message);
   }
 
-  public static warn(message: string) {
+  public static debug(message: string): void {
+    EPLogger.tslogger.debug(message);
+  }
+
+  public static warn(message: string): void {
     EPLogger.tslogger.warn(message);
   }
 
-  public static error(message: string) {
+  public static error(message: string): void {
     EPLogger.tslogger.error(message);
   }
 
