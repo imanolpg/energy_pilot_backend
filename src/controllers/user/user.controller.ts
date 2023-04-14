@@ -13,7 +13,7 @@ class UserController {
     }
   }
 
-  public static addCurrentData(req: Request, res: Response) {
+  public static addCurrentData(req: Request, res: Response): void {
     EPLogger.info("llegado!!");
     res.send("holaa");
   }
