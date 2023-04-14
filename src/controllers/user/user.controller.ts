@@ -1,5 +1,5 @@
-import { EPLogger } from "../../utils";
 import {Request, Response} from "express";
+import { UserService } from "../../services";
 
 class UserController {
 
@@ -14,8 +14,15 @@ class UserController {
   }
 
   public static addCurrentData(req: Request, res: Response): void {
-    EPLogger.info("llegado!!");
-    res.send("holaa");
+    // add type check for request body
+
+    UserService.saveCurrentData(req.body)
+    .then(() => {
+      res.send("Data added");
+    })
+    .catch(() => {
+      res.status(500).send();
+    });
   }
 
 }

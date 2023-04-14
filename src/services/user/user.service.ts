@@ -1,3 +1,4 @@
+import { Json } from "sequelize/types/utils";
 
 class UserService {
 
@@ -9,6 +10,10 @@ class UserService {
     if (!UserService.instance) {
       UserService.instance = new UserService();
     }
+  }
+
+  public static async saveCurrentData(currentData: Json): Promise<void> {
+    console.log(currentData);
   }
 
 }
