@@ -22,6 +22,8 @@ services:
     image: energy_pilot_backend
     build: .
     command: bash -c 'while !</dev/tcp/database/3306; do sleep 3; done; npm run start'
+    environment:
+      - DB_HOST=database
     ports:
       - "5000:8000"
     depends_on:
