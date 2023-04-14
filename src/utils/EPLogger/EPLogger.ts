@@ -6,7 +6,10 @@ class EPLogger {
   private static tslogger: Logger<ILogObj>;
 
   private constructor() {
-      EPLogger.tslogger = new Logger();
+      EPLogger.tslogger = new Logger({
+        name: "EnergyPilot-Backend",
+        prettyLogTemplate: "{{hh}}:{{MM}}:{{ss}}:{{ms}} {{logLevelName}} {{name}} {{fileNameWithLine}}\t"
+      });
   }
 
   public static generateSingleton(): void {
