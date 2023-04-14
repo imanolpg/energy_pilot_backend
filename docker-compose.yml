@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  api:
+    container_name: "EnergyPilot_Backend"
+    image: "energy_pilot_backend"
+    build: "."
+    ports:
+      - "5000:8000"
