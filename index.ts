@@ -1,5 +1,5 @@
 import express, {Express, Request, Response} from "express";
-import {router} from "./routes";
+import {router} from "./src/routes";
 
 const port = 8000;
 const app: Express = express();
