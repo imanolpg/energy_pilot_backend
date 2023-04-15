@@ -21,9 +21,14 @@ function error (message: string): void {
   tslogger.error(message)
 }
 
+function fatal (message: string): void {
+  tslogger.fatal(message)
+}
+
 export default {
   info,
   debug,
   warn,
-  error
+  error,
+  fatal
 }

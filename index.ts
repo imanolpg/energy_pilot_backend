@@ -1,6 +1,9 @@
 import { nconf, EPLogger } from './src/utils'
+
 import express, { Express, Response } from 'express'
 import coockieParser from 'cookie-parser'
+import https from 'https'
+
 import { router } from './src/routes'
 import { connection } from './src/database/config'
 import { exit } from 'process'
@@ -32,6 +35,23 @@ app.get('/', (res: Response) => {
 
 app.use('/api', router)
 
-app.listen(port, () => {
+// get the cert and key for https
+let key: string | undefined = nconf.get('SSL_KEY')
+let cert: string | undefined = nconf.get('SSL_CERT')
+if (key === undefined || cert === undefined) {
+  // certificates have not been found
+  // the server can not be created
+  EPLogger.fatal('SSL key or cert not found. Server can not be created. Exiting..')
+  exit(1)
+}
+
+// reformat cert and key for newline characters
+key = key.replace(/\\n/g, '\n')
+cert = cert.replace(/\\n/g, '\n')
+
+https.createServer({
+  cert,
+  key
+}, app).listen(port, () => {
   EPLogger.info(`Listening in port ${port}!!`)
 })
