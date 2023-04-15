@@ -29,6 +29,13 @@
     "@types/nconf": "^0.10.3",
     "@types/node": "^18.15.11",
     "@types/validator": "^13.7.15",
-    "nodemon": "^2.0.22"
+    "nodemon": "^2.0.22",
+    "ts-standard": "^12.0.2"
+  },
+  "eslintConfig": {
+    "parserOptions": {
+      "project": "./tsconfig.json"
+    },
+    "extends": ["./node_modules/ts-standard/eslintrc.json"]
   }
 }

@@ -1,5 +1,5 @@
-import { UserService } from "./user/user.service";
+import UserService from './user/user.service'
 
-export {
+export {
   UserService
 }

@@ -1,54 +1,51 @@
-import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript'
 
-import { User } from "./user.model";
+import { User } from './user.model'
 
 @Table({
-  tableName: "Voltajes"
+  tableName: 'Voltajes'
 })
 class Voltaje extends Model {
-
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    comment: "Voltaje reading id",
+    comment: 'Voltaje reading id',
     primaryKey: true,
     autoIncrement: true,
-    unique: true,
+    unique: true
   })
-  id!: number;
+    id!: number
 
   @Column({
     type: DataType.DATE,
     allowNull: false,
-    comment: "Date and time when the voltaje lecture was made"
+    comment: 'Date and time when the voltaje lecture was made'
   })
-  date!: string;
+    date!: string
 
   @Column({
     type: DataType.FLOAT,
     allowNull: false,
-    comment: "Value of the voltaje lecture"
+    comment: 'Value of the voltaje lecture'
   })
-  lecture!: number;
+    lecture!: number
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    comment: "Cell the voltaje corresponds to"
+    comment: 'Cell the voltaje corresponds to'
   })
-  cellNumber!: number;
+    cellNumber!: number
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    comment: "User that has made the lecture"
+    comment: 'User that has made the lecture'
   })
-  user!: number;
-
+    user!: number
 }
 
-
-export{
+export {
   Voltaje
-};
+}

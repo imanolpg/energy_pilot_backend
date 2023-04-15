@@ -1,47 +1,44 @@
-import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript';
+import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript'
 
-import { User } from "./user.model";
+import { User } from './user.model'
 
 @Table({
-  tableName: "Currents"
+  tableName: 'Currents'
 })
 class Current extends Model {
-
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    comment: "Current reading id",
+    comment: 'Current reading id',
     primaryKey: true,
     autoIncrement: true,
-    unique: true,
+    unique: true
   })
-  id!: number;
+    id!: number
 
   @Column({
     type: DataType.DATE,
     allowNull: false,
-    comment: "Date and time when the current lecture was made"
+    comment: 'Date and time when the current lecture was made'
   })
-  date!: string;
+    date!: string
 
   @Column({
     type: DataType.FLOAT,
     allowNull: false,
-    comment: "Value of the current lecture"
+    comment: 'Value of the current lecture'
   })
-  lecture!: number;
+    lecture!: number
 
   @ForeignKey(() => User)
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    comment: "User that has made the lecture"
+    comment: 'User that has made the lecture'
   })
-  user!: number;
-
+    user!: number
 }
 
-
-export{
+export {
   Current
-};
+}

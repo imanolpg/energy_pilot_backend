@@ -1,49 +1,47 @@
-import { Table, Column, Model, HasMany, DataType } from 'sequelize-typescript';
+import { Table, Column, Model, HasMany, DataType } from 'sequelize-typescript'
 
-import { Current } from './current.model';
-import { Voltaje } from './voltaje.model';
+import { Current } from './current.model'
+import { Voltaje } from './voltaje.model'
 
 @Table({
-  tableName: "Users"
+  tableName: 'Users'
 })
 class User extends Model {
-
   @Column({
     type: DataType.INTEGER,
-    comment: "User id",
+    comment: 'User id',
     primaryKey: true,
     autoIncrement: true
   })
-  id!: number;
+    id!: number
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
     unique: true,
-    comment: "Username of the user"
+    comment: 'Username of the user'
   })
-  userName!: string;
+    userName!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    comment: "Hashed password sha256"
+    comment: 'Hashed password sha256'
   })
-  password!: string;
+    password!: string
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
-    comment: "Password hash salt"
+    comment: 'Password hash salt'
   })
-  salt!: string;
+    salt!: string
 
   @HasMany(() => Current)
-  currentLecture!: Current[];
+    currentLecture!: Current[]
 
   @HasMany(() => Voltaje)
-  voltajeLecture!: Voltaje[];
-
+    voltajeLecture!: Voltaje[]
 }
 
 export { User }

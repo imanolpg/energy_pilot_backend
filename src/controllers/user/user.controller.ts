@@ -1,32 +1,18 @@
-import {Request, Response} from "express";
-import { UserService } from "../../services";
+import { Request, Response } from 'express'
+import { UserService } from '../../services'
 
-class UserController {
+function addCurrentData (req: Request, res: Response): void {
+  // add type check for request body
 
-  private static instance: UserController;
-
-  private constructor() {}
-
-  public static generateSingleton(): void {
-    if (!UserController.instance) {
-      UserController.instance = new UserController();
-    }
-  }
-
-  public static addCurrentData(req: Request, res: Response): void {
-    // add type check for request body
-
-    UserService.saveCurrentData(req.body)
+  UserService.saveCurrentData(req.body)
     .then(() => {
-      res.send("Data added");
+      res.send('Data added')
     })
     .catch(() => {
-      res.status(500).send();
-    });
-  }
-
+      res.status(500).send()
+    })
 }
 
-UserController.generateSingleton();
-
-export {UserController}
+export default {
+  addCurrentData
+}
