@@ -1,24 +1,30 @@
-import { Request, Response } from 'express'
+import { Response } from 'express'
 import { UserService } from '../../services'
-import { CurrentReceivedJson, CurrentSaveData, VoltajeReceivedJson, VoltajeSaveData } from '../../types/types'
+import { CurrentReceivedJson, CurrentSaveData, RequestWithUser, VoltajeReceivedJson, VoltajeSaveData } from '../../types/types'
 
-async function toNewCurrentDataService (receivedObject: CurrentReceivedJson): Promise<CurrentSaveData> {
+async function toNewCurrentDataService (receivedObject: CurrentReceivedJson, userId: number): Promise<CurrentSaveData> {
   const newCurrentData: CurrentSaveData = Object.assign(receivedObject,
     {
-      user: 1
+      userId
     })
   return newCurrentData
 }
 
-async function toNewVoltajeDataService (receivedObject: VoltajeReceivedJson): Promise<VoltajeSaveData> {
+async function toNewVoltajeDataService (receivedObject: VoltajeReceivedJson, userId: number): Promise<VoltajeSaveData> {
   const newVoltaje: VoltajeSaveData = Object.assign(receivedObject, {
-    user: 1
+    userId
   })
   return newVoltaje
 }
 
-function saveCurrentData (req: Request, res: Response): void {
-  toNewCurrentDataService(req.body)
+function saveCurrentData (req: RequestWithUser, res: Response): void {
+  // check that req.userId is present
+  if (req.userId === undefined) {
+    res.status(500).send('Internal server error')
+    return
+  }
+
+  toNewCurrentDataService(req.body, req.userId)
     .then(async (parsedData: CurrentSaveData) => await UserService.saveCurrentData(parsedData))
     .then(() => {
       res.send('Current added')
@@ -28,8 +34,14 @@ function saveCurrentData (req: Request, res: Response): void {
     })
 }
 
-function saveVoltajeData (req: Request, res: Response): void {
-  toNewVoltajeDataService(req.body)
+function saveVoltajeData (req: RequestWithUser, res: Response): void {
+  // check that req.userId is present
+  if (req.userId === undefined) {
+    res.status(500).send('Internal server error')
+    return
+  }
+
+  toNewVoltajeDataService(req.body, req.userId)
     .then(async (parsedData: VoltajeSaveData) => await UserService.saveVoltajeData(parsedData))
     .then(() => {
       res.send('Voltaje added')

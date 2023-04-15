@@ -7,7 +7,7 @@ async function saveCurrentData (currentData: CurrentSaveData): Promise<void> {
   const current: Current = new Current()
   current.date = currentData.date
   current.lecture = currentData.lecture
-  current.user = currentData.user
+  current.user = currentData.userId
   await current.save()
     .catch((e: Error) => {
       EPLogger.error(e.message)
@@ -20,7 +20,7 @@ async function saveVoltajeData (voltajeData: VoltajeSaveData): Promise<void> {
   voltaje.date = voltajeData.date
   voltaje.lecture = voltajeData.lecture
   voltaje.cellNumber = voltajeData.cellNumber
-  voltaje.user = voltajeData.user
+  voltaje.user = voltajeData.userId
   await voltaje.save()
     .catch((e: Error) => {
       EPLogger.error(e.message)

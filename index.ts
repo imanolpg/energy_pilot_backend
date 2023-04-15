@@ -1,6 +1,6 @@
-// load nconf
 import { nconf, EPLogger } from './src/utils'
-import express, { Express, Request, Response } from 'express'
+import express, { Express, Response } from 'express'
+import coockieParser from 'cookie-parser'
 import { router } from './src/routes'
 import { connection } from './src/database/config'
 import { exit } from 'process'
@@ -23,7 +23,10 @@ connection.sync({ force: nconf.get('SEQUELIZE_FORCE_RESTART_DB') }).then(() => {
 const port = 8000
 const app: Express = express()
 
-app.get('/', (req: Request, res: Response) => {
+// generate coockie-parse middleware
+app.use(coockieParser())
+
+app.get('/', (res: Response) => {
   res.send('Server alive!')
 })
 

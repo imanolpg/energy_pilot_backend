@@ -1,3 +1,4 @@
+import { Request } from 'express'
 
 // cell number type
 export type CellNumber = 1 | 2 | 3
@@ -16,7 +17,7 @@ export interface CurrentReceivedJson {
 export interface CurrentSaveData {
   date: string
   lecture: number
-  user: number
+  userId: number
 }
 
 /**
@@ -35,5 +36,12 @@ export interface VoltajeSaveData {
   date: string
   lecture: number
   cellNumber: number
-  user: number
+  userId: number
+}
+
+/**
+ * Extend Express Request to add user file for JWT
+ */
+export interface RequestWithUser extends Request {
+  userId?: number
 }

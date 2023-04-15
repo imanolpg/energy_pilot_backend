@@ -1,16 +1,9 @@
-import { createHash, randomBytes } from 'crypto'
-import { EPLogger, nconf } from '../utils'
+import { randomBytes } from 'crypto'
+import { EPLogger, nconf, Cypher } from '../utils'
 
 import { User } from './models/user.model'
 import { Current } from './models/current.model'
 import { Voltaje } from './models/voltaje.model'
-
-function hashPassword (password: string, salt: string): string {
-  return createHash('sha256')
-    .update(password)
-    .update(createHash('sha256').update(salt, 'utf8').digest('hex'))
-    .digest('hex')
-}
 
 function randomNumberGenerator (min = 0, max = 1, fractionDigits = 0, inclusive = true): number {
   const precision = Math.pow(10, Math.max(fractionDigits, 0))
@@ -29,12 +22,19 @@ function randomDateGenerator (start: Date, end: Date): string {
 const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   let i: number
 
+  // get PUBLIC_SALT
+  const publicSalt: string | undefined = nconf.get('PUBLIC_SALT')
+  if (publicSalt === undefined) {
+    throw Error('PUBLIC_SALT not found')
+  }
+
   // add user1
   const user1: User = new User()
   user1.userName = 'imanolpg'
   user1.salt = randomBytes(4).toString('base64url')
   const user1Password: string = '1234'
-  user1.password = hashPassword(user1Password, user1.salt)
+  const hashedUser1PasswordPublicSalt: string = Cypher.hashPassword(user1Password, publicSalt)
+  user1.password = Cypher.hashPassword(hashedUser1PasswordPublicSalt, user1.salt)
   user1.currentLecture = []
   user1.voltajeLecture = []
   await user1.save()
@@ -75,7 +75,8 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   user2.userName = 'javierguti'
   user2.salt = randomBytes(4).toString('base64url')
   const user2Password: string = 'holaaaaaaaa'
-  user2.password = hashPassword(user2Password, user2.salt)
+  const hashedUser2PasswordPublicSalt: string = Cypher.hashPassword(user2Password, publicSalt)
+  user2.password = Cypher.hashPassword(hashedUser2PasswordPublicSalt, user2.salt)
   user2.currentLecture = []
   user2.voltajeLecture = []
   await user2.save()
@@ -116,7 +117,8 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   user3.userName = 'jokkinn'
   user3.salt = randomBytes(4).toString('base64url')
   const user3Password: string = 'kokdf.fFF@@sfSDFsss'
-  user3.password = hashPassword(user3Password, user3.salt)
+  const hashedUser3PasswordPublicSalt: string = Cypher.hashPassword(user3Password, publicSalt)
+  user3.password = Cypher.hashPassword(hashedUser3PasswordPublicSalt, user3.salt)
   user3.currentLecture = []
   user3.voltajeLecture = []
   await user3.save()
