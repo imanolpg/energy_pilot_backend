@@ -1,8 +1,9 @@
+
 // cell number type
 export type CellNumber = 1 | 2 | 3
 
 /**
- * Interface for receiving objec in addVoltaje
+ * Type for receiving objec in addCurrentData controller
  */
 export interface CurrentReceivedJson {
   date: string
@@ -10,10 +11,29 @@ export interface CurrentReceivedJson {
 }
 
 /**
- * Interface for receiving objec in addCurrentData
+ * Type for passing object to saveCurrentData service
+ */
+export interface CurrentSaveData {
+  date: string
+  lecture: number
+  user: number
+}
+
+/**
+ * Interface for receiving objec in addJsonData
  */
 export interface VoltajeReceivedJson {
   date: string
   lecture: number
-  cell: CellNumber
+  cellNumber: number
+}
+
+/**
+ * Interface for passing objec to addCurrentData service
+ */
+export interface VoltajeSaveData {
+  date: string
+  lecture: number
+  cellNumber: number
+  user: number
 }

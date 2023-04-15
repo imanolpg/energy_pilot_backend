@@ -4,6 +4,7 @@ import { UserController } from '../../controllers'
 
 const currentDataRouter: Router = Router()
 
-currentDataRouter.post('/', json(), UserController.addCurrentData)
+currentDataRouter.post('/addCurrent', json(), UserController.saveCurrentData)
+currentDataRouter.post('/addVoltaje', json(), UserController.saveVoltajeData)
 
 export { currentDataRouter }

@@ -1,9 +1,34 @@
-import { Json } from 'sequelize/types/utils'
+import { Current } from '../../database/models/current.model'
+import { Voltaje } from '../../database/models/voltaje.model'
+import { CurrentSaveData, VoltajeSaveData } from '../../types/types'
+import { EPLogger } from '../../utils'
 
-async function saveCurrentData (currentData: Json): Promise<void> {
-  console.log(currentData)
+async function saveCurrentData (currentData: CurrentSaveData): Promise<void> {
+  const current: Current = new Current()
+  current.date = currentData.date
+  current.lecture = currentData.lecture
+  current.user = currentData.user
+  await current.save()
+    .catch((e: Error) => {
+      EPLogger.error(e.message)
+      throw Error('Cant save current data')
+    })
+}
+
+async function saveVoltajeData (voltajeData: VoltajeSaveData): Promise<void> {
+  const voltaje: Voltaje = new Voltaje()
+  voltaje.date = voltajeData.date
+  voltaje.lecture = voltajeData.lecture
+  voltaje.cellNumber = voltajeData.cellNumber
+  voltaje.user = voltajeData.user
+  await voltaje.save()
+    .catch((e: Error) => {
+      EPLogger.error(e.message)
+      throw Error('Cant save voltaje data')
+    })
 }
 
 export default {
-  saveCurrentData
+  saveCurrentData,
+  saveVoltajeData
 }
