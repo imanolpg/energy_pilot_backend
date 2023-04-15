@@ -1,5 +1,5 @@
 import { Router, json } from 'express'
-import { AuthMiddleware } from '../../middleware'
+import { AuthMiddleware } from '../../middlewares'
 
 const authDataRouter: Router = Router()
 
