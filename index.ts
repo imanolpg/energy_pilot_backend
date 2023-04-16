@@ -1,6 +1,6 @@
 import { nconf, EPLogger } from './src/utils'
 
-import express, { Express, Response } from 'express'
+import express, { Express, Request, Response } from 'express'
 import coockieParser from 'cookie-parser'
 import https from 'https'
 
@@ -10,26 +10,35 @@ import { exit } from 'process'
 import { SEQUELIZE_INSERT_EXAMPLES } from './src/database/examples.insert'
 
 // connect to the database
-connection.sync({ force: nconf.get('SEQUELIZE_FORCE_RESTART_DB') }).then(() => {
-  EPLogger.info('Database connected!')
-  if (nconf.get('SEQUELIZE_INSERT_EXAMPLES') === true) {
-    SEQUELIZE_INSERT_EXAMPLES()
-      .catch((e: Error) => { EPLogger.error('Could not insert exaple data') })
-  }
-})
-  .catch((e: Error) => {
-    EPLogger.error(String(e))
-    exit(1)
+const env: string | undefined = nconf.get('NODE_ENV')
+if (env === undefined) {
+  EPLogger.fatal('NODE_ENV variable not found')
+  exit(1)
+}
+if (env === 'development' || env === 'production') {
+  connection.sync({ force: nconf.get('SEQUELIZE_FORCE_RESTART_DB') }).then(() => {
+    EPLogger.info('Database connected!')
+    if (nconf.get('SEQUELIZE_INSERT_EXAMPLES') === true) {
+      SEQUELIZE_INSERT_EXAMPLES()
+        .catch((e: Error) => { EPLogger.error('Could not insert exaple data') })
+    }
   })
+    .catch((e: Error) => {
+      EPLogger.error(String(e))
+      exit(1)
+    })
+}
 
 // Express app config
 const port = 8000
 const app: Express = express()
 
+console.log(env)
+
 // generate coockie-parse middleware
 app.use(coockieParser())
 
-app.get('/', (res: Response) => {
+app.get('/', (req: Request, res: Response) => {
   res.send('Server alive!')
 })
 
@@ -49,11 +58,11 @@ if (key === undefined || cert === undefined) {
 key = key.replace(/\\n/g, '\n')
 cert = cert.replace(/\\n/g, '\n')
 
-https.createServer({
+const server: https.Server = https.createServer({
   cert,
   key
 }, app).listen(port, () => {
   EPLogger.info(`Listening in port ${port}!!`)
 })
 
-export default app
+export default server
