@@ -1,0 +1,168 @@
+import { EPLogger } from '../../../utils'
+
+describe('Test EPLogger logger', () => {
+  test(`should call '${'info'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.info('')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('INFO'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'info'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.info('testing the EPLogger info function')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('testing the EPLogger info function'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'info'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.info('fs´d`ç+s3· s_;:')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('fs´d`ç+s3· s_;:'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'debug'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.debug('')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('DEBUG'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'debug'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.debug('testing the EPLogger debug function')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('testing the EPLogger debug function'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'debug'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.debug('fs´d`ç+s3· s_;:')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('fs´d`ç+s3· s_;:'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'warn'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.warn('')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('WARN'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'warn'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.warn('testing the EPLogger warn function')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('testing the EPLogger warn function'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'warn'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.warn('fs´d`ç+s3· s_;:')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('fs´d`ç+s3· s_;:'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'error'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.error('')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('ERROR'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'error'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.error('testing the EPLogger error function')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('testing the EPLogger error function'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'error'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.error('fs´d`ç+s3· s_;:')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('fs´d`ç+s3· s_;:'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'fatal'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.fatal('')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('FATAL'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'fatal'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.fatal('testing the EPLogger fatal function')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('testing the EPLogger fatal function'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+
+  test(`should call '${'fatal'}'`, () => {
+    const consoleSpy = jest.spyOn(console, 'log').mockImplementation(() => {})
+    const consoleWarnSpy = jest.spyOn(console, 'warn').mockImplementation(() => {})
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
+    EPLogger.fatal('fs´d`ç+s3· s_;:')
+    expect(consoleSpy).toHaveBeenCalledWith(expect.stringContaining('fs´d`ç+s3· s_;:'))
+    consoleSpy.mockRestore()
+    consoleWarnSpy.mockRestore()
+    consoleErrorSpy.mockRestore()
+  })
+})

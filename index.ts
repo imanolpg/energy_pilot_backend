@@ -55,3 +55,5 @@ https.createServer({
 }, app).listen(port, () => {
   EPLogger.info(`Listening in port ${port}!!`)
 })
+
+export default app
