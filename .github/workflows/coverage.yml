@@ -12,6 +12,8 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    enviroment: test
+
     strategy:
       matrix:
         node-version: [19.x]
