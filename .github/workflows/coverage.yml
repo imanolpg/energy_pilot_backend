@@ -12,7 +12,7 @@ jobs:
 
     runs-on: ubuntu-latest
 
-    enviroment: test
+    environment: test
 
     strategy:
       matrix:
