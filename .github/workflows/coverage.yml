@@ -5,6 +5,8 @@ on: [push, pull_request]
 env:
   SSL_KEY: ${{ secrets.SSL_KEY }}
   SSL_CERT: ${{ secrets.SSL_CERT }}
+  JWT_SECRET_TOKEN: ${{ secrets.JWT_SECRET_TOKEN }}
+  PUBLIC_SALT: ${{ secrets.PUBLIC_SALT }}
 
 
 jobs:
