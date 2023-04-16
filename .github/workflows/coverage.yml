@@ -1,6 +1,11 @@
-name: Code Coverage
+name: Tests
 
 on: [push, pull_request]
+
+env:
+  SSL_KEY: ${{ secrets.SSL_KEY }}
+  SSL_CERT: ${{ secrets.SSL_CERT }}
+
 
 jobs:
   build:

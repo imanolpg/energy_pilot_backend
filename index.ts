@@ -33,8 +33,6 @@ if (env === 'development' || env === 'production') {
 const port = 8000
 const app: Express = express()
 
-console.log(env)
-
 // generate coockie-parse middleware
 app.use(coockieParser())
 
