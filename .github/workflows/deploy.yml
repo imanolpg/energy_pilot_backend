@@ -12,6 +12,11 @@ env:
   JWT_SECRET_TOKEN: ${{ secrets.JWT_SECRET_TOKEN }}
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   DB_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
+  DB_HOST: ${{ vars.DB_HOST }}
+  DB_USER: ${{ vars.DB_USER }}
+  DB_SCHEMA: ${{ vars.DB_SCHEMA }}
+  DB_PORT: ${{ vars.DB_PORT }}
+  PUBLIC_SALT: ${{ vars.PUBLIC_SALT }}
 
 
 jobs:
@@ -21,10 +26,25 @@ jobs:
 
     environment: production
 
-
     steps:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Create .env file
+      run : |
+        echo "DB_HOST= ${{ vars.DB_HOST }}" > .env
+        echo "DB_USER= ${{ vars.DB_USER }}" >> .env
+        echo "DB_SCHEMA= ${{ vars.DB_SCHEMA }}" >> .env
+        echo "DB_PORT= ${{ vars.DB_PORT }}" >> .env
+        echo "PUBLIC_SALT= ${{ vars.PUBLIC_SALT }}" >> .env
+        echo "SSL_KEY= ${{ env.SSL_KEY }}" >> .env
+        echo "SSL_CERT= ${{ env.SSL_CERT }}" >> .env
+        echo "JWT_SECRET_TOKEN= ${{ env.JWT_SECRET_TOKEN }}" >> .env
+        echo "DB_PASSWORD= ${{ env.DB_PASSWORD }}" >> .env
+        echo "DB_ROOT_PASSWORD= ${{ env.DB_ROOT_PASSWORD }}" >> .env
+
+    - name: Stop running docker container
+      run: docker-compose down
+
     - name: Build and start container
-      run: docker-compose up --build
+      run: docker-compose up --build -d
