@@ -30,5 +30,13 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v3
 
+    - name: Create .env file
+      run : |
+        echo "DB_HOST=${{ env.DB_HOST }}" > .env
+        echo "DB_USER=${{ env.DB_USER }}" >> .env
+        echo "DB_SCHEMA=${{ env.DB_SCHEMA }}" >> .env
+        echo "DB_PORT=${{ env.DB_PORT }}" >> .env
+        echo "PUBLIC_SALT=${{ env.PUBLIC_SALT }}" >> .env
+
     - name: Build and start container
-      run: docker-compose up --build
+      run: sudo docker-compose up --build
