@@ -43,8 +43,16 @@ jobs:
         echo "DB_PASSWORD= ${{ env.DB_PASSWORD }}" >> .env
         echo "DB_ROOT_PASSWORD= ${{ env.DB_ROOT_PASSWORD }}" >> .env
 
-    - name: Stop running docker container
-      run: docker-compose down
+    - name: Bring down containers
+      uses: docker/compose@v2.1.1
+      with:
+        compose-file: docker-compose.yml
+        project-name: energyPilot-backend
+        down: true
 
-    - name: Build and start container
-      run: docker-compose up --build -d
+    - name: Build and run containers
+      uses: docker/compose@v2.1.1
+      with:
+        compose-file: docker-compose.yml
+        project-name: energyPilot-backend
+        up: -d
