@@ -43,5 +43,8 @@ jobs:
         echo "DB_PASSWORD= ${{ env.DB_PASSWORD }}" >> .env
         echo "DB_ROOT_PASSWORD= ${{ env.DB_ROOT_PASSWORD }}" >> .env
 
+    - name: Stop running docker container
+      run: docker-compose down
+
     - name: Build and start container
-      run: sudo docker-compose up --build
+      run: docker-compose up --build -d
