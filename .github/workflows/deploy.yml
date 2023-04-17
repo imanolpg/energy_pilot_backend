@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches: [production]
+  pull_request:
+    branches: [production]
+
+env:
+  SSL_KEY: ${{ secrets.SSL_KEY }}
+  SSL_CERT: ${{ secrets.SSL_CERT }}
+  JWT_SECRET_TOKEN: ${{ secrets.JWT_SECRET_TOKEN }}
+  DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+  DB_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
+
+
+jobs:
+  build:
+
+    runs-on: [self-hosted, prod]
+
+    environment: production
+
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Build and start container
+      run: docker-compose up --build
