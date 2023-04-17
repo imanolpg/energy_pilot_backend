@@ -12,11 +12,6 @@ env:
   JWT_SECRET_TOKEN: ${{ secrets.JWT_SECRET_TOKEN }}
   DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
   DB_ROOT_PASSWORD: ${{ secrets.DB_ROOT_PASSWORD }}
-  DB_HOST: ${{ vars.DB_HOST }}
-  DB_USER: ${{ vars.DB_USER }}
-  DB_SCHEMA: ${{ vars.DB_SCHEMA }}
-  DB_PORT: ${{ vars.DB_PORT }}
-  PUBLIC_SALT: ${{ vars.PUBLIC_SALT }}
 
 
 jobs:
@@ -37,6 +32,11 @@ jobs:
         echo "DB_SCHEMA=${{ env.DB_SCHEMA }}" >> .env
         echo "DB_PORT=${{ env.DB_PORT }}" >> .env
         echo "PUBLIC_SALT=${{ env.PUBLIC_SALT }}" >> .env
+        echo "SSL_KEY=${{ env.SSL_KEY }}" >> .env
+        echo "SSL_CERT=${{ env.SSL_CERT }}" >> .env
+        echo "JWT_SECRET_TOKEN=${{ env.JWT_SECRET_TOKEN }}" >> .env
+        echo "DB_PASSWORD=${{ env.DB_PASSWORD }}" >> .env
+        echo "DB_ROOT_PASSWORD=${{ env.DB_ROOT_PASSWORD }}" >> .env
 
     - name: Build and start container
       run: sudo docker-compose up --build
