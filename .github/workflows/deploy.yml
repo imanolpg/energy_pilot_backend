@@ -21,7 +21,6 @@ env:
 
 jobs:
   build:
-
     runs-on: [self-hosted, prod]
 
     environment: production
@@ -42,6 +41,16 @@ jobs:
         echo "JWT_SECRET_TOKEN= ${{ env.JWT_SECRET_TOKEN }}" >> .env
         echo "DB_PASSWORD= ${{ env.DB_PASSWORD }}" >> .env
         echo "DB_ROOT_PASSWORD= ${{ env.DB_ROOT_PASSWORD }}" >> .env
+    
+    - name: Create ssl cert and key file for nginx
+      run: |
+        echo "${{ env.SSL_CERT }}" > nginx/certs/cert.pem
+        echo "${{ env.SSL_KEY }}" > nginx/certs/key.pem
+
+    - name: Add newlines to ssl cert and key
+      run: |
+        sed -i s/\\\\n/\\n/g nginx/certs/cert.pem
+        sed -i s/\\\\n/\\n/g nginx/certs/key.pem 
 
     - name: Stop running docker container
       run: docker-compose down
