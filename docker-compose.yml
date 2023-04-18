@@ -17,6 +17,7 @@ services:
       - "3307:3306"
     volumes:
       - dbdata:/var/lib/mysql
+
   api:
     container_name: EnergyPilot_Backend
     image: energy_pilot_backend
@@ -28,6 +29,21 @@ services:
       - "8000:8000"
     depends_on:
       - database
+
+  nginx:
+    image: nginx
+    container_name: EnergyPilot_nginx
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d/
+      - ./nginx/certs/:/etc/nginx/certs/
+    depends_on:
+      - database
+      - api
+
 volumes:
   dbdata:
 
