@@ -44,6 +44,7 @@ jobs:
     
     - name: Create ssl cert and key file for nginx
       run: |
+        mkdir nginx/certs/
         echo "${{ env.SSL_CERT }}" > nginx/certs/cert.pem
         echo "${{ env.SSL_KEY }}" > nginx/certs/key.pem
 
