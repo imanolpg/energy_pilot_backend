@@ -17,7 +17,7 @@ if (env === undefined) {
 }
 if (env === 'development' || env === 'production') {
   connection.sync({ force: nconf.get('SEQUELIZE_FORCE_RESTART_DB') }).then(() => {
-    EPLogger.info('Database connected!')
+    EPLogger.info('Sequelize database connected!')
     if (nconf.get('SEQUELIZE_INSERT_EXAMPLES') === true) {
       SEQUELIZE_INSERT_EXAMPLES()
         .catch((e: Error) => { EPLogger.error('Could not insert exaple data') })

@@ -18,6 +18,14 @@ services:
     volumes:
       - dbdata:/var/lib/mysql
 
+  redis:
+    container_name: EnergyPilot_Redis
+    image: redis
+    expose:
+      - "6379"
+    ports:
+      - "6379:6379"
+
   api:
     container_name: EnergyPilot_Backend
     image: energy_pilot_backend
@@ -29,6 +37,7 @@ services:
       - "8000:8000"
     depends_on:
       - database
+      - redis
 
   nginx:
     image: nginx
