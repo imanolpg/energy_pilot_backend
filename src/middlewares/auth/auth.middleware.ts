@@ -3,24 +3,8 @@ import jwt, { VerifyErrors } from 'jsonwebtoken'
 import { EPLogger, nconf, Cypher } from '../../utils'
 import { RequestWithUser } from '../../types/types'
 import { User } from '../../database/models/user.model'
-import { RedisClientType, createClient } from 'redis'
 
-const redisClient: RedisClientType = createClient({
-  url: 'redis://redis/'
-})
-redisClient.on('error', (err: Error) => {
-  EPLogger.error(`Redis error: ${err.message}`)
-})
-redisClient.on('connect', () => {
-  EPLogger.info('Redis databse connected!')
-});
-
-(async () => {
-  await redisClient.connect()
-})()
-  .catch((err: Error) => {
-    EPLogger.error(`${err.message}`)
-  })
+import { redisClient } from '../../..'
 
 function authenticateToken (req: RequestWithUser, res: Response, next: NextFunction): void {
   const authHeader: string | undefined = req.cookies['auth-token']
