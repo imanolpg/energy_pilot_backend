@@ -3,13 +3,14 @@ import { nconf, EPLogger } from './src/utils'
 import express, { Express, Request, Response } from 'express'
 import coockieParser from 'cookie-parser'
 import https from 'https'
+import { RedisClientType, createClient } from 'redis'
 
 import { router } from './src/routes'
 import { connection } from './src/database/config'
 import { exit } from 'process'
 import { SEQUELIZE_INSERT_EXAMPLES } from './src/database/examples.insert'
 
-// connect to the database
+// connect to mysql database
 const env: string | undefined = nconf.get('NODE_ENV')
 if (env === undefined) {
   EPLogger.fatal('NODE_ENV variable not found')
@@ -17,7 +18,7 @@ if (env === undefined) {
 }
 if (env === 'development' || env === 'production') {
   connection.sync({ force: nconf.get('SEQUELIZE_FORCE_RESTART_DB') }).then(() => {
-    EPLogger.info('Database connected!')
+    EPLogger.info('Sequelize database connected!')
     if (nconf.get('SEQUELIZE_INSERT_EXAMPLES') === true) {
       SEQUELIZE_INSERT_EXAMPLES()
         .catch((e: Error) => { EPLogger.error('Could not insert exaple data') })
@@ -26,6 +27,25 @@ if (env === 'development' || env === 'production') {
     .catch((e: Error) => {
       EPLogger.error(String(e))
       exit(1)
+    })
+}
+
+// connect to redis database
+let redisClient: RedisClientType
+if (env === 'development' || env === 'production') {
+  redisClient = createClient({
+    url: 'redis://redis/'
+  })
+  redisClient.on('error', (err: Error) => {
+    EPLogger.error(`Redis error: ${err.message}`)
+  })
+  redisClient.on('connect', () => {
+    EPLogger.info('Redis databse connected!')
+  })
+
+  redisClient.connect()
+    .catch((err: Error) => {
+      EPLogger.error(`${err.message}`)
     })
 }
 
@@ -62,5 +82,9 @@ const server: https.Server = https.createServer({
 }, app).listen(port, () => {
   EPLogger.info(`Listening in port ${port}!!`)
 })
+
+export {
+  redisClient
+}
 
 export default server

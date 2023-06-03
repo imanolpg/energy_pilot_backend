@@ -18,7 +18,7 @@ It is also 🐳 [dockerized](https://www.docker.com/) with with the API and a �
 npm install
 ```
 
-### Enviroment variables
+### Environment variables
 Env variables are loaded with [nconf](https://github.com/indexzero/nconf) with a cascade aproach.
 Variables are loaded in the following order `Command-line arguments` ➡️ `Environment variables` ➡️ `Argument variables` ➡️ `path/to/config.json`.
 Aditionally there is a section for default values if one variable is not present.

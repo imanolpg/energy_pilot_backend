@@ -3,8 +3,6 @@ name: Deploy
 on:
   push:
     branches: [production]
-  pull_request:
-    branches: [production]
 
 env:
   SSL_KEY: ${{ secrets.SSL_KEY }}

@@ -68,3 +68,6 @@ Vagrantfile
 
 # nginx ssl certs
 nginx/certs/
+
+# tests reports
+reports/
