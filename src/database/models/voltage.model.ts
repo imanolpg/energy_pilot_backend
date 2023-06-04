@@ -3,13 +3,13 @@ import { Table, Column, Model, DataType, ForeignKey } from 'sequelize-typescript
 import { User } from './user.model'
 
 @Table({
-  tableName: 'Voltajes'
+  tableName: 'Voltages'
 })
-class Voltaje extends Model {
+class Voltage extends Model {
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    comment: 'Voltaje reading id',
+    comment: 'Voltage reading id',
     primaryKey: true,
     autoIncrement: true,
     unique: true
@@ -19,21 +19,21 @@ class Voltaje extends Model {
   @Column({
     type: DataType.DATE,
     allowNull: false,
-    comment: 'Date and time when the voltaje lecture was made'
+    comment: 'Date and time when the voltage lecture was made'
   })
     date!: string
 
   @Column({
     type: DataType.FLOAT,
     allowNull: false,
-    comment: 'Value of the voltaje lecture'
+    comment: 'Value of the voltage lecture'
   })
     lecture!: number
 
   @Column({
     type: DataType.INTEGER,
     allowNull: false,
-    comment: 'Cell the voltaje corresponds to'
+    comment: 'Cell the voltage corresponds to'
   })
     cellNumber!: number
 
@@ -47,5 +47,5 @@ class Voltaje extends Model {
 }
 
 export {
-  Voltaje
+  Voltage
 }

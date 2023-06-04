@@ -3,7 +3,7 @@ import { nconf, EPLogger } from '../utils'
 
 import { User } from './models/user.model'
 import { Current } from './models/current.model'
-import { Voltaje } from './models/voltaje.model'
+import { Voltage } from './models/voltage.model'
 
 const connection: Sequelize = new Sequelize({
   dialect: 'mysql',
@@ -12,7 +12,7 @@ const connection: Sequelize = new Sequelize({
   password: nconf.get('DB_PASSWORD'),
   database: nconf.get('DB_SCHEMA'),
   port: nconf.get('DB_PORT'),
-  models: [User, Current, Voltaje],
+  models: [User, Current, Voltage],
   logging: (log) => {
     if (nconf.get('SEQUELIZE_LOGGIN') === true) {
       EPLogger.info(log)

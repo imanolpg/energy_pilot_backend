@@ -1,6 +1,6 @@
 import { Response } from 'express'
 import { UserService } from '../../services'
-import { CurrentReceivedJson, CurrentSaveData, RequestWithUser, VoltajeReceivedJson, VoltajeSaveData } from '../../types/types'
+import { CurrentReceivedJson, CurrentSaveData, RequestWithUser, VoltageReceivedJson, VoltageSaveData } from '../../types/types'
 
 async function toNewCurrentDataService (receivedObject: CurrentReceivedJson, userId: number): Promise<CurrentSaveData> {
   const newCurrentData: CurrentSaveData = Object.assign(receivedObject,
@@ -10,11 +10,11 @@ async function toNewCurrentDataService (receivedObject: CurrentReceivedJson, use
   return newCurrentData
 }
 
-async function toNewVoltajeDataService (receivedObject: VoltajeReceivedJson, userId: number): Promise<VoltajeSaveData> {
-  const newVoltaje: VoltajeSaveData = Object.assign(receivedObject, {
+async function toNewVoltageDataService (receivedObject: VoltageReceivedJson, userId: number): Promise<VoltageSaveData> {
+  const newVoltage: VoltageSaveData = Object.assign(receivedObject, {
     userId
   })
-  return newVoltaje
+  return newVoltage
 }
 
 function saveCurrentData (req: RequestWithUser, res: Response): void {
@@ -34,17 +34,17 @@ function saveCurrentData (req: RequestWithUser, res: Response): void {
     })
 }
 
-function saveVoltajeData (req: RequestWithUser, res: Response): void {
+function saveVoltageData (req: RequestWithUser, res: Response): void {
   // check that req.userId is present
   if (req.userId === undefined) {
     res.status(500).send('Internal server error')
     return
   }
 
-  toNewVoltajeDataService(req.body, req.userId)
-    .then(async (parsedData: VoltajeSaveData) => await UserService.saveVoltajeData(parsedData))
+  toNewVoltageDataService(req.body, req.userId)
+    .then(async (parsedData: VoltageSaveData) => await UserService.saveVoltageData(parsedData))
     .then(() => {
-      res.send('Voltaje added')
+      res.send('Voltage added')
     })
     .catch((e: Error) => {
       res.status(500).send(e.message)
@@ -53,5 +53,5 @@ function saveVoltajeData (req: RequestWithUser, res: Response): void {
 
 export default {
   saveCurrentData,
-  saveVoltajeData
+  saveVoltageData
 }

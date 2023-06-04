@@ -1,6 +1,6 @@
 import { Current } from '../../database/models/current.model'
-import { Voltaje } from '../../database/models/voltaje.model'
-import { CurrentSaveData, VoltajeSaveData } from '../../types/types'
+import { Voltage } from '../../database/models/voltage.model'
+import { CurrentSaveData, VoltageSaveData } from '../../types/types'
 import { EPLogger } from '../../utils'
 
 async function saveCurrentData (currentData: CurrentSaveData): Promise<void> {
@@ -15,20 +15,20 @@ async function saveCurrentData (currentData: CurrentSaveData): Promise<void> {
     })
 }
 
-async function saveVoltajeData (voltajeData: VoltajeSaveData): Promise<void> {
-  const voltaje: Voltaje = new Voltaje()
-  voltaje.date = voltajeData.date
-  voltaje.lecture = voltajeData.lecture
-  voltaje.cellNumber = voltajeData.cellNumber
-  voltaje.user = voltajeData.userId
-  await voltaje.save()
+async function saveVoltageData (voltageData: VoltageSaveData): Promise<void> {
+  const voltage: Voltage = new Voltage()
+  voltage.date = voltageData.date
+  voltage.lecture = voltageData.lecture
+  voltage.cellNumber = voltageData.cellNumber
+  voltage.user = voltageData.userId
+  await voltage.save()
     .catch((e: Error) => {
       EPLogger.error(e.message)
-      throw Error('Cant save voltaje data')
+      throw Error('Cant save voltage data')
     })
 }
 
 export default {
   saveCurrentData,
-  saveVoltajeData
+  saveVoltageData
 }

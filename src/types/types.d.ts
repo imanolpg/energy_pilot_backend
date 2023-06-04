@@ -23,7 +23,7 @@ export interface CurrentSaveData {
 /**
  * Interface for receiving objec in addJsonData
  */
-export interface VoltajeReceivedJson {
+export interface VoltageReceivedJson {
   date: string
   lecture: number
   cellNumber: number
@@ -32,7 +32,7 @@ export interface VoltajeReceivedJson {
 /**
  * Interface for passing objec to addCurrentData service
  */
-export interface VoltajeSaveData {
+export interface VoltageSaveData {
   date: string
   lecture: number
   cellNumber: number

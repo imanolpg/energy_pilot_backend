@@ -3,7 +3,7 @@ import { EPLogger, nconf, Cypher } from '../utils'
 
 import { User } from './models/user.model'
 import { Current } from './models/current.model'
-import { Voltaje } from './models/voltaje.model'
+import { Voltage } from './models/voltage.model'
 
 function randomNumberGenerator (min = 0, max = 1, fractionDigits = 0, inclusive = true): number {
   const precision = Math.pow(10, Math.max(fractionDigits, 0))
@@ -36,7 +36,7 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   const hashedUser1PasswordPublicSalt: string = Cypher.hashPassword(user1Password, publicSalt)
   user1.password = Cypher.hashPassword(hashedUser1PasswordPublicSalt, user1.salt)
   user1.currentLecture = []
-  user1.voltajeLecture = []
+  user1.voltageLecture = []
   await user1.save()
     .then(() => { EPLogger.debug('User1 saved!') })
     .catch((e: Error) => { EPLogger.error(`Error saving user1: ${e.message}`) })
@@ -55,20 +55,20 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   }
   EPLogger.debug('Currents saved for user1')
 
-  // insert voltaje measures for user2
+  // insert voltage measures for user2
   i = 0
-  while (i < nconf.get('SEQUELIZE_USER1_VOLTAJE_READS')) {
-    const voltaje: Voltaje = new Voltaje()
-    voltaje.date = randomDateGenerator(new Date('2023-04-10'), new Date('2023-04-14'))
-    voltaje.lecture = randomNumberGenerator(3.3, 4.2, 2, true)
-    voltaje.cellNumber = randomNumberGenerator(1, 3, 0, true)
-    voltaje.user = user1.id
-    await voltaje.save()
-      .catch((e: Error) => { EPLogger.error(`Error saving voltaje: ${e.message}`) })
+  while (i < nconf.get('SEQUELIZE_USER1_VOLTAGE_READS')) {
+    const voltage: Voltage = new Voltage()
+    voltage.date = randomDateGenerator(new Date('2023-04-10'), new Date('2023-04-14'))
+    voltage.lecture = randomNumberGenerator(3.3, 4.2, 2, true)
+    voltage.cellNumber = randomNumberGenerator(1, 3, 0, true)
+    voltage.user = user1.id
+    await voltage.save()
+      .catch((e: Error) => { EPLogger.error(`Error saving voltage: ${e.message}`) })
 
     i++
   }
-  EPLogger.debug('Voltajes saved for user1')
+  EPLogger.debug('Voltages saved for user1')
 
   // add user2
   const user2: User = new User()
@@ -78,7 +78,7 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   const hashedUser2PasswordPublicSalt: string = Cypher.hashPassword(user2Password, publicSalt)
   user2.password = Cypher.hashPassword(hashedUser2PasswordPublicSalt, user2.salt)
   user2.currentLecture = []
-  user2.voltajeLecture = []
+  user2.voltageLecture = []
   await user2.save()
     .then(() => { EPLogger.debug('User2 saved!') })
     .catch((e: Error) => { EPLogger.error(`Error saving user2: ${e.message}`) })
@@ -97,20 +97,20 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   }
   EPLogger.debug('Currents save for user2')
 
-  // insert voltaje measures for user2
+  // insert voltage measures for user2
   i = 0
-  while (i < nconf.get('SEQUELIZE_USER2_VOLTAJE_READS')) {
-    const voltaje: Voltaje = new Voltaje()
-    voltaje.date = randomDateGenerator(new Date('2023-04-10'), new Date('2023-04-14'))
-    voltaje.lecture = randomNumberGenerator(3.3, 4.2, 2, true)
-    voltaje.cellNumber = randomNumberGenerator(1, 3, 0, true)
-    voltaje.user = user2.id
-    await voltaje.save()
-      .catch((e: Error) => { EPLogger.error(`Error saving voltaje: ${e.message}`) })
+  while (i < nconf.get('SEQUELIZE_USER2_VOLTAGE_READS')) {
+    const voltage: Voltage = new Voltage()
+    voltage.date = randomDateGenerator(new Date('2023-04-10'), new Date('2023-04-14'))
+    voltage.lecture = randomNumberGenerator(3.3, 4.2, 2, true)
+    voltage.cellNumber = randomNumberGenerator(1, 3, 0, true)
+    voltage.user = user2.id
+    await voltage.save()
+      .catch((e: Error) => { EPLogger.error(`Error saving voltage: ${e.message}`) })
 
     i++
   }
-  EPLogger.debug('Voltajes saved for user2')
+  EPLogger.debug('Voltages saved for user2')
 
   // add user3
   const user3: User = new User()
@@ -120,7 +120,7 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   const hashedUser3PasswordPublicSalt: string = Cypher.hashPassword(user3Password, publicSalt)
   user3.password = Cypher.hashPassword(hashedUser3PasswordPublicSalt, user3.salt)
   user3.currentLecture = []
-  user3.voltajeLecture = []
+  user3.voltageLecture = []
   await user3.save()
     .then(() => { EPLogger.debug('User3 saved!') })
     .catch((e: Error) => { EPLogger.error(`Error saving user3: ${e.message}`) })
@@ -139,20 +139,20 @@ const SEQUELIZE_INSERT_EXAMPLES = async (): Promise<void> => {
   }
   EPLogger.debug('Currents save for user3')
 
-  // insert voltaje measures for user2
+  // insert voltage measures for user2
   i = 0
-  while (i < nconf.get('SEQUELIZE_USER3_VOLTAJE_READS')) {
-    const voltaje: Voltaje = new Voltaje()
-    voltaje.date = randomDateGenerator(new Date('2023-04-10'), new Date('2023-04-14'))
-    voltaje.lecture = randomNumberGenerator(3.3, 4.2, 2, true)
-    voltaje.cellNumber = randomNumberGenerator(1, 3, 0, true)
-    voltaje.user = user3.id
-    await voltaje.save()
-      .catch((e: Error) => { EPLogger.error(`Error saving voltaje: ${e.message}`) })
+  while (i < nconf.get('SEQUELIZE_USER3_VOLTAGE_READS')) {
+    const voltage: Voltage = new Voltage()
+    voltage.date = randomDateGenerator(new Date('2023-04-10'), new Date('2023-04-14'))
+    voltage.lecture = randomNumberGenerator(3.3, 4.2, 2, true)
+    voltage.cellNumber = randomNumberGenerator(1, 3, 0, true)
+    voltage.user = user3.id
+    await voltage.save()
+      .catch((e: Error) => { EPLogger.error(`Error saving voltage: ${e.message}`) })
 
     i++
   }
-  EPLogger.debug('Voltajes saved for user3')
+  EPLogger.debug('Voltages saved for user3')
 }
 
 export {

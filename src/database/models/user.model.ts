@@ -1,7 +1,7 @@
 import { Table, Column, Model, HasMany, DataType } from 'sequelize-typescript'
 
 import { Current } from './current.model'
-import { Voltaje } from './voltaje.model'
+import { Voltage } from './voltage.model'
 
 @Table({
   tableName: 'Users'
@@ -40,8 +40,8 @@ class User extends Model {
   @HasMany(() => Current)
     currentLecture!: Current[]
 
-  @HasMany(() => Voltaje)
-    voltajeLecture!: Voltaje[]
+  @HasMany(() => Voltage)
+    voltageLecture!: Voltage[]
 }
 
 export { User }

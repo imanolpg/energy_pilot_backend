@@ -35,25 +35,25 @@ describe(`Test '${'/api/user/addCurrent'}' route`, () => {
   })
 })
 
-describe(`Test '${'/api/user/addVoltaje'}' route`, () => {
-  test(`get '${'/api/user/addVoltaje'}'`, async () => {
-    await request(server).get('/api/user/addVoltaje').expect(404)
+describe(`Test '${'/api/user/addVoltage'}' route`, () => {
+  test(`get '${'/api/user/addVoltage'}'`, async () => {
+    await request(server).get('/api/user/addVoltage').expect(404)
   })
 
-  test(`put '${'/api/user/addVoltaje'}'`, async () => {
-    await request(server).put('/api/user/addVoltaje').expect(404)
+  test(`put '${'/api/user/addVoltage'}'`, async () => {
+    await request(server).put('/api/user/addVoltage').expect(404)
   })
 
-  test(`delete '${'/api/user/addVoltaje'}'`, async () => {
-    await request(server).delete('/api/user/addVoltaje').expect(404)
+  test(`delete '${'/api/user/addVoltage'}'`, async () => {
+    await request(server).delete('/api/user/addVoltage').expect(404)
   })
 
-  test(`post '${'/api/user/addVoltaje'}' with no auth-token`, async () => {
-    await request(server).post('/api/user/addVoltaje').expect(400)
+  test(`post '${'/api/user/addVoltage'}' with no auth-token`, async () => {
+    await request(server).post('/api/user/addVoltage').expect(400)
   })
 
-  test(`post '${'/api/user/addVoltaje'}' with auth-token`, async () => {
-    await request(server).post('/api/user/addVoltaje').set('Cookie', ['auth-token=12345']).expect(401)
+  test(`post '${'/api/user/addVoltage'}' with auth-token`, async () => {
+    await request(server).post('/api/user/addVoltage').set('Cookie', ['auth-token=12345']).expect(401)
   })
 })
 

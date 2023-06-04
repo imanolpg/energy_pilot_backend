@@ -6,6 +6,6 @@ import { AuthMiddleware } from '../../middlewares'
 const currentDataRouter: Router = Router()
 
 currentDataRouter.post('/addCurrent', AuthMiddleware.authenticateToken, json(), UserController.saveCurrentData)
-currentDataRouter.post('/addVoltaje', AuthMiddleware.authenticateToken, json(), UserController.saveVoltajeData)
+currentDataRouter.post('/addVoltage', AuthMiddleware.authenticateToken, json(), UserController.saveVoltageData)
 
 export { currentDataRouter }
