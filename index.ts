@@ -60,6 +60,16 @@ app.get('/', (req: Request, res: Response) => {
   res.send('Server alive!')
 })
 
+// generate endpoint for license
+app.get('/privacy', (req: Request, res: Response) => {
+  res.sendFile('resources/privacy-policy.html', { root: __dirname })
+})
+
+// generate endpoint for terms and conditions
+app.get('/terms-and-conditions', (req: Request, res: Response) => {
+  res.sendFile('resources/terms-and-conditions.html', { root: __dirname })
+})
+
 app.use('/api', router)
 
 // get the cert and key for https
