@@ -21,7 +21,7 @@ if (env === 'development' || env === 'production') {
     EPLogger.info('Sequelize database connected!')
     if (nconf.get('SEQUELIZE_INSERT_EXAMPLES') === true) {
       SEQUELIZE_INSERT_EXAMPLES()
-        .catch((e: Error) => { EPLogger.error('Could not insert exaple data') })
+        .catch((e: Error) => { EPLogger.error(e.message) })
     }
   })
     .catch((e: Error) => {
