@@ -1,10 +1,8 @@
-import { createHash } from 'crypto'
+import crypto from 'crypto-js'
 
 function hashPassword (password: string, salt: string): string {
-  return createHash('sha256')
-    .update(password)
-    .update(createHash('sha256').update(salt, 'utf8').digest('hex'))
-    .digest('hex')
+  const hashedPassword: string = crypto.SHA256(password + salt).toString()
+  return hashedPassword
 }
 
 export default {
